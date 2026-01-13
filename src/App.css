@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+body {
+  background: linear-gradient(-45deg, #ff5f9e, #ff8dc7, #ffc1dd, #ffb3c6);
+  background-size: 400% 400%;
+  animation: gradient 12s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* LANDING PAGE HEART ANIMATION */
+@keyframes pulseFloat {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(-5px) scale(1.02);
+  }
+
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+.pulse-float {
+  animation: pulseFloat 2.8s ease-in-out infinite;
+}
+
+.tap:active {
+  transform: scale(0.92);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease forwards;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.fade-out {
+  animation: fadeOut 0.4s ease forwards;
+}
+
+/* YES BUTTON */
+@keyframes yesPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 105, 180, 0.55);
+  }
+  70% {
+    box-shadow: 0 0 0 18px rgba(255, 105, 180, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 105, 180, 0);
+  }
+}
+
+/* NO BUTTON */
+@keyframes noShrink {
+    
+}
+.tap:active {
+  transform: scale(0.92);
+}
