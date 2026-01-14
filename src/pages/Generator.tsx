@@ -4,7 +4,7 @@ import ResetButton from "../components/ResetButton";
 import { getRandomFlirtyQuote } from "../data/flirtyQuotes";
 import { getRandomValentineCard } from "../data/valentinesCards";
 import confetti from "canvas-confetti";
-import { useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 export default function Generator() {
   const [quote, setQuote] = useState<string>("");
@@ -12,19 +12,37 @@ export default function Generator() {
   const [scale, setScale] = useState(1);
   const [surrendered, setSurrendered] = useState(false);
   const noText = surrendered ? "Ok fine 😒" : "NO 😭";
+  const confettiRef = useRef<ReturnType<typeof confetti.create> | null>(null);
+  const heartShape = useMemo(
+    () => confetti.shapeFromText({ text: "💖", scalar: 1.2 }),
+    []
+  );
+
+  useEffect(() => {
+    confettiRef.current = confetti.create(undefined, {
+      resize: true,
+      useWorker: true,
+    });
+
+    return () => {
+      confettiRef.current?.reset();
+      confettiRef.current = null;
+    };
+  }, []);
 
   function handleYes() {
     setCard(getRandomValentineCard());
     setQuote(getRandomFlirtyQuote());
-    confetti({
+    const fire = confettiRef.current ?? confetti;
+    fire({
       particleCount: 80,
       spread: 100,
-      shapes: ["heart"],
+      shapes: [heartShape],
       scalar: 1.4,
       colors: ["#ff4d6d", "#ff8fab", "#ffc2d1"],
     });
     setTimeout(() => {
-      confetti({
+      fire({
         particleCount: 60,
         spread: 120,
         origin: { y: 0.4 },
